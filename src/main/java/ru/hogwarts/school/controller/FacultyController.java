@@ -24,7 +24,7 @@ public class FacultyController {
     }
 
     @PostMapping
-    public Faculty createFaculty(Faculty faculty) {
+    public Faculty createFaculty(@RequestBody Faculty faculty) {
         return facultyService.createFaculty(faculty);
     }
 
@@ -33,10 +33,9 @@ public class FacultyController {
         return facultyService.editeFaculty(faculty);
     }
 
-    @DeleteMapping
-    public ResponseEntity deleteFaculty(@PathVariable Long id) {
+    @DeleteMapping("{id}")
+    public void deleteFaculty(@PathVariable Long id) {
         facultyService.deleteFaculty(id);
-        return ResponseEntity.ok().build();
     }
     @GetMapping
     public ResponseEntity<Collection<Faculty>> getAllFaculty(){
