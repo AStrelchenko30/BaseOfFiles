@@ -4,6 +4,7 @@ import org.springframework.stereotype.Service;
 import ru.hogwarts.school.model.Student;
 import ru.hogwarts.school.repositories.StudentRepository;
 
+import java.util.Collection;
 import java.util.HashMap;
 
 @Service
@@ -27,5 +28,12 @@ public class StudentService {
         studentRepository.deleteById(id);
 
     }
+    public Collection<Student> findByAgeBetween(Integer min, Integer max){
+        return studentRepository.findByAgeBetween(10,20);
+    }
+    public Collection<Student> findAll(){
+        return studentRepository.findAll();
+    }
+
 
 }
