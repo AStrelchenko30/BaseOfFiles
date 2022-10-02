@@ -69,8 +69,4 @@ public class AvatarController {
         return avatarService.getAll(pageNumber,pageSize);
 
     }
-
-
-}
-
 }

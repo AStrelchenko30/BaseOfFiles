@@ -6,6 +6,7 @@ import ru.hogwarts.school.repositories.StudentRepository;
 
 import java.util.Collection;
 import java.util.HashMap;
+import java.util.List;
 
 @Service
 public class StudentService {
@@ -33,6 +34,10 @@ public class StudentService {
     }
     public Collection<Student> findAll(){
         return studentRepository.findAll();
+    }
+
+    public List<Student> findAllByName(String name){
+        return studentRepository.findAllByName(name);
     }
 
 

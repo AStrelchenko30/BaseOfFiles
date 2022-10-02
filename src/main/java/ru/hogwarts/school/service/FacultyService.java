@@ -7,6 +7,7 @@ import ru.hogwarts.school.repositories.StudentRepository;
 
 import java.util.Collection;
 import java.util.HashMap;
+import java.util.List;
 
 @Service
 public class FacultyService {
@@ -39,5 +40,7 @@ public class FacultyService {
     public Collection<Faculty> findAllByColor(String color){
         return facultyRepository.findAllByColor(color);
     }
-
+public List<Faculty> findByNameAndColor(String name, String color){
+        return findByNameAndColor(name,color);
+}
 }
