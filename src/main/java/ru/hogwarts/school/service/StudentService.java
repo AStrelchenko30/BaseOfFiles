@@ -9,6 +9,7 @@ import ru.hogwarts.school.repositories.StudentRepository;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class StudentService {
@@ -48,6 +49,23 @@ public class StudentService {
     public List<Student> findAllByName(String name){
         logger.debug("Поиск студента по имени :{} ",name);
         return studentRepository.findAllByName(name);
+    }
+
+    public Collection<String> getAllStudentFilteredByName(){
+        return studentRepository.findAll().stream()
+                .map(Student::getName)
+                .map(String::toUpperCase)
+                .filter(s->s.startsWith("А"))
+                .sorted()
+                .collect(Collectors.toList());
+    }
+
+    public Double getAllStudentAvAge(){
+        return studentRepository.findAll()
+                .stream()
+                .mapToInt((Student::getAge))
+                .average()
+                .orElse(0);
     }
 
 

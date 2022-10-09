@@ -54,4 +54,14 @@ public class StudentController {
         return ResponseEntity.ok(students);
     }
 
+    @GetMapping("/findbynames")
+    public ResponseEntity<Collection<String>> getAllStudentFilteredByName() {
+        Collection<String> collection=studentService.getAllStudentFilteredByName();
+        return ResponseEntity.ok(collection);
+    }
+    @GetMapping("/avage")
+    public Double getAllStudentAvAge(){
+        return studentService.getAllStudentAvAge();
+    }
+
 }

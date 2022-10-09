@@ -2,14 +2,13 @@ package ru.hogwarts.school.service;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import ru.hogwarts.school.model.Faculty;
 import ru.hogwarts.school.repositories.FacultyRepository;
 import ru.hogwarts.school.repositories.StudentRepository;
 
-import java.util.Collection;
-import java.util.HashMap;
-import java.util.List;
+import java.util.*;
 
 @Service
 public class FacultyService {
@@ -22,13 +21,13 @@ public class FacultyService {
     }
 
     public Faculty createFaculty(Faculty faculty) {
-        logger.debug("Создание Факультета: {}",faculty);
+        logger.debug("Создание Факультета: {}", faculty);
         return facultyRepository.save(faculty);
     }
 
     public Faculty findFaculty(long id) {
         logger.debug("Нахождения факультета по id : {}", id);
-     return facultyRepository.findById(id).get();
+        return facultyRepository.findById(id).get();
     }
 
     public Faculty editeFaculty(Faculty faculty) {
@@ -40,17 +39,28 @@ public class FacultyService {
         logger.debug("Удаление факультета по id : {}", id);
         facultyRepository.deleteById(id);
     }
-    public Collection<Faculty> getAll(){
+
+    public Collection<Faculty> getAll() {
         logger.debug("Получнение всех факультетов");
         return facultyRepository.findAll();
     }
 
-    public Collection<Faculty> findAllByColor(String color){
+    public Collection<Faculty> findAllByColor(String color) {
         logger.debug("Получение всех факультетов по цвету: {}", color);
         return facultyRepository.findAllByColor(color);
     }
-public List<Faculty> findByNameAndColor(String name, String color){
-        logger.debug("Нахождение по имени и цвету факультета : {}" , name , color);
-        return findByNameAndColor(name,color);
-}
+
+    public List<Faculty> findByNameAndColor(String name, String color) {
+        logger.debug("Нахождение по имени и цвету факультета : {}", name, color);
+        return findByNameAndColor(name, color);
+    }
+
+    public ResponseEntity<String> getFacultiesByLongerName() {
+        Optional<String> maxFacultyName = facultyRepository
+                .findAll()
+                .stream()
+                .map(Faculty::getName)
+                .max(Comparator.comparing(String::length));
+        return ResponseEntity.ok(maxFacultyName.get());
+    }
 }

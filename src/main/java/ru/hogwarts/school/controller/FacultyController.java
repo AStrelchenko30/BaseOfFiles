@@ -49,4 +49,8 @@ public class FacultyController {
     String color) {
         return ResponseEntity.ok(facultyService.findByNameAndColor(name,color));
     }
+    @GetMapping("/findLongerNameFaculty")
+    public ResponseEntity<String> getFacultiesByLongerName(){
+        return ResponseEntity.ok(facultyService.getFacultiesByLongerName().toString());
+    }
 }
