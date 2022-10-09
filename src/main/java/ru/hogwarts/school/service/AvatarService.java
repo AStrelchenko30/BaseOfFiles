@@ -1,5 +1,7 @@
 package ru.hogwarts.school.service;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.http.ResponseEntity;
@@ -26,6 +28,9 @@ import static java.nio.file.StandardOpenOption.CREATE_NEW;
 @Service
 @Transactional
 public class AvatarService {
+
+    Logger logger = LoggerFactory.getLogger(AvatarService.class);
+
 private final AvatarRepository avatarRepository;
 private final StudentRepository studentRepository;
 
@@ -38,6 +43,7 @@ private final StudentRepository studentRepository;
     }
 
      public void uploadAvatar(Long id, MultipartFile avatarFile)throws IOException{
+        logger.debug("Загружаем изображение : {}" ,avatarFile);
         Student student=studentRepository.findById(id).get();
         Path filePath=Path.of(avatarsDir,student+"."+getExtensions(avatarFile.getOriginalFilename()));
         Files.createDirectories(filePath.getParent());
@@ -59,6 +65,7 @@ private final StudentRepository studentRepository;
         avatarRepository.save(avatar);
     }
     private byte[] generateDataForDB(Path filePath) throws IOException{
+        logger.debug("Generate Data For DB");
         try(
                 InputStream is=Files.newInputStream(filePath);
                 BufferedInputStream bis=new BufferedInputStream(is,1024);
