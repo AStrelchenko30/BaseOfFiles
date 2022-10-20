@@ -24,6 +24,10 @@ public class Faculty {
         this.color = color;
     }
 
+    public Collection<Student> getStudents() {
+        return students;
+    }
+
     public Faculty() {
 
     }

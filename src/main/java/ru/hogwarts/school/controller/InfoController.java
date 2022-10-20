@@ -10,6 +10,7 @@ import java.util.stream.Stream;
 @RestController
 @RequestMapping("/info")
 public class InfoController {
+
     @Value("${server.port}")
     private int ServerPort;
 
@@ -26,5 +27,6 @@ public class InfoController {
         time=System.currentTimeMillis()-time;
         return (int) time;
     }
+
 }
 

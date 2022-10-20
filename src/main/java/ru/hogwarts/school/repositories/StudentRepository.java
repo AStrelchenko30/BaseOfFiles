@@ -3,6 +3,7 @@ package ru.hogwarts.school.repositories;
 import liquibase.pro.packaged.S;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
+import ru.hogwarts.school.model.Faculty;
 import ru.hogwarts.school.model.Student;
 
 import java.util.Collection;
@@ -14,11 +15,12 @@ public interface StudentRepository extends JpaRepository<Student, Long> {
 
     List<Student> findAllByName(String name);
 
-    Collection<String> getAllStudentFilteredByName();
+    Collection<String> getAllStudentFilteredByName(String name);
 
-    Double getAllStudentAvAge();
+    Double getAverageAgeOfStudent();
 
     Collection<Student> getAll();
+    Faculty getFaculty();
     @Query(value = "SELECT COUNT(*) FROM Student", nativeQuery = true)
     Long getAmountOfAllStudents();
 

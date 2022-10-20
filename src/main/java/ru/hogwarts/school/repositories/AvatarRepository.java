@@ -10,4 +10,6 @@ public interface AvatarRepository  extends JpaRepository<Avatar,Long> {
        Optional<Avatar> findById(Long id);
 
 
+
+
 }
